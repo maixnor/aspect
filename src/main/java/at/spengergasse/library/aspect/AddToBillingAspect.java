@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @Component
 public class AddToBillingAspect {
 
-    public static BigDecimal defaultBillingAmount = BigDecimal.valueOf(0.10);
+    public static BigDecimal defaultBillingAmount = BigDecimal.valueOf(0.69);
 
     UserRepository userRepository;
 
@@ -26,6 +26,7 @@ public class AddToBillingAspect {
         long userId = (long)joinPoint.getArgs()[1];
         User user = userRepository.fromId(userId);
         user.addAmount(defaultBillingAmount);
+        System.out.printf("user with id %s was billed %s.\n%n", user.id, defaultBillingAmount.toString());
         return joinPoint.proceed();
     }
 }
